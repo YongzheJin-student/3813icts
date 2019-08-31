@@ -1,0 +1,66 @@
+<ng-template [ngIf]="superAdmin">
+    <h2>Admin Dashboard</h2>
+    </ng-template>
+                <h3>Manage Options</h3>
+    <div class="container login-container">
+                <div class="row">
+                    <div class="col-md-6 login-form-1">
+                        <form (submit)="createUser();" id="createUser">
+                            <ng-template [ngIf]="Admin">
+                            <h3>Create User</h3>
+                            <div class="form-group">
+                                <input name="username"  placeholder="Username" [(ngModel)]='username'>
+    
+                            </div>
+                            <div class="form-group">
+                                <input name="password"placeholder="password" [(ngModel)]='password'>
+                            </div>
+                            <div>
+                            <select [(ngModel)]="role" name="role">
+                                <option value="user">User</option>
+                                <option value="groupAdmin">Group Admin</option>
+                              </select>
+                            </div><br>
+                            <button   type="submit">Create</button>
+                            </ng-template>
+                            </form>
+                           
+                          
+    
+                                <form (submit)="deleteUser(deletedUser);">
+                                    <ng-template [ngIf]="Admin">
+                                    <h3>Delete User</h3>
+                                    <select placeholder="Delete User" [(ngModel)]="deletedUser" name="deluser">
+                                      <option *ngFor="let user of users" [value]="user.username">
+                                        {{user.username}}
+                                      </option>
+                                    </select>
+                                      <p> Selected User to Delete:</p> <p class="highlight">{{deletedUser}}</p>
+                                      <button  type="submit">Delete</button>
+                                    </ng-template>
+                                </form>                      
+                                <form (submit)="createGroup();">
+                                    <ng-template [ngIf]="superAdmin">  
+                                    <h2>Create Group</h2>
+                                    <p>Group Name</p>
+                                    <input name="groupname" placeholder="Group Name" [(ngModel)]='groupname'>
+                                    <br>
+                                    <br>
+                                    <button  type="submit">Create</button>
+                                    </ng-template>
+                                  </form>
+    
+    
+                      <form (submit)="deleteGroup(deletedGroup);">
+                          <ng-template [ngIf]="superAdmin">
+                          <h2>Delete Group</h2>
+                          <select placeholder="Delete Group" [(ngModel)]="deletedGroup" name="delgroup">
+                            <option *ngFor="let group of groups" [value]="group.name">
+                              {{group.name}}
+                            </option>
+                          </select>
+                        <p> Selected Group to Delete:</p> <p class="highlight">{{deletedGroup}}</p>
+                        <button type="submit">Delete</button>
+                        </ng-template>
+                      </form>
+                    
