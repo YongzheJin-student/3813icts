@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
 	users = [{}];
 	superAdmin = false;
 	Admin = false;
-
+//data setting
 	
 
   ngOnInit(): void {
@@ -118,6 +118,7 @@ public createGroup() {
 	if (!this.groupname) {
 		alert("Group name field must not be blank!");
 	} else {
+
 		const req = this.http.post('http://localhost:3000/api/groupreg', {
 				groupname: this.groupname
 			})
@@ -138,8 +139,10 @@ public createGroup() {
 					} 
 				},
 			);
-	}
 }
+}
+	
+
 
 
 
@@ -149,6 +152,13 @@ public deleteGroup(deletedGroup) {
 		if (deletedGroup) {
 			event.preventDefault();
 			console.log(deletedGroup);
+			const req=this.http.post('http://localhost:3000/api/groups',{})
+			.subscribe((data:any)=>{
+				console.log('groupdata', data.groupData);
+				this.groups = data.groupData;
+				console.log('thisgroups', this.groups)
+			})
+	}
 			const req = this.http.post('http://localhost:3000/api/groupdel', {
 					groupname: this.deletedGroup
 				})
@@ -175,4 +185,3 @@ public deleteGroup(deletedGroup) {
 }
 
 
-}
